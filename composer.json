@@ -24,6 +24,9 @@
         "code-check": "vendor\\bin\\phpcs --colors",
         "code-corrige": "vendor\\bin\\phpcbf --colors",
         "test-ava": "vendor\\bin\\phpunit" 
+    },
+    "scripts-descriptions": {
+        "test-ava": "Teste geral do PHPUnit"
     }
 
 }
