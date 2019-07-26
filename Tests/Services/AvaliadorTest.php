@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpUnitEstudo\Leilao\Tests\Service;
+namespace PhpUnitEstudo\Tests\Service;
 
 use PhpUnitEstudo\Leilao\Model\Lance;
 use PhpUnitEstudo\Leilao\Model\Leilao;
@@ -81,7 +81,7 @@ class AvaliadorTest extends TestCase
 
         $leilao->lancesRand();
 
-        return [[$leilao]];
+        return ["leilao em Ordem aleatoria" => [$leilao]];
 
     }
 

@@ -17,6 +17,9 @@ class Leilao
 
     public function recebeLance(Lance $lance)
     {
+        if( !empty($this->lances) and $this->checkLanceRepetido($lance) )
+            return;
+
         $this->lances[] = $lance;
     }
 
@@ -38,5 +41,14 @@ class Leilao
             return rand(-1,1);
         });
         $this->lances = $lances_aux;
+    }
+
+    private function checkLanceRepetido(Lance $lance)
+    {        
+        $nomeUltimo = $this->lances[count($this->lances)-1];
+        if( $lance->getUsuario() == $nomeUltimo->getUsuario() ){
+            return true;
+        }
+        return false;
     }
 }

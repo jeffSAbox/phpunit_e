@@ -1,0 +1,13 @@
+PhpUnitEstudo\Tests\Model\Lance
+ [x] Verifica repeticao de lance do mesmo usuario with data set "LancesEmOrdem"
+ [x] Verifica repeticao de lance do mesmo usuario with data set "LancesRepetidosSequencia"
+
+PhpUnitEstudo\Tests\Model\Leilao
+ [x] Leilao deve receber lances with data set "leilao1"
+ [x] Leilao deve receber lances with data set "leilao2"
+
+PhpUnitEstudo\Tests\Service\Avaliador
+ [x] Avaliador deve encontrar o maior valor with data set "leilao em Ordem aleatoria"
+ [x] Avaliador deve encontrar o menor valor with data set "leilao em Ordem aleatoria"
+ [x] Avaliador deve buscar os 3 maiores lances with data set "leilao em Ordem aleatoria"
+

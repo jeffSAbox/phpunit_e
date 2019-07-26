@@ -12,7 +12,8 @@
     ],
     "autoload": {
         "psr-4": {
-            "PhpUnitEstudo\\Leilao\\": "src"
+            "PhpUnitEstudo\\Leilao\\": "src",
+            "PhpUnitEstudo\\Tests\\": "Tests"
         }
     },
     "require-dev": {
@@ -22,7 +23,7 @@
     "scripts": {
         "code-check": "vendor\\bin\\phpcs --colors",
         "code-corrige": "vendor\\bin\\phpcbf --colors",
-        "test-ava": "vendor\\bin\\phpunit Tests\\Services\\AvaliadorTest.php --colors" 
+        "test-ava": "vendor\\bin\\phpunit" 
     }
 
 }
