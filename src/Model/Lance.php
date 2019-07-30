@@ -24,4 +24,5 @@ class Lance
     {
         return $this->valor;
     }
+    
 }

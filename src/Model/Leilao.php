@@ -20,6 +20,9 @@ class Leilao
         if( $this->checkLanceRepetido($lance) )
             return;
 
+        if( $this->checkLanceLimite($lance) )
+            return;
+
         $this->lances[] = $lance;
     }
 
@@ -43,7 +46,7 @@ class Leilao
         $this->lances = $lances_aux;
     }
 
-    private function checkLanceRepetido(Lance $lance)
+    private function checkLanceRepetido(Lance $lance): bool
     {                
         if( count($this->lances) < 1 )
             return false;
@@ -54,4 +57,28 @@ class Leilao
         
         return false;
     }
+
+    private function checkLanceLimite(Lance $lance): bool
+    {
+
+        $usuario = $lance->getUsuario();
+        $total = array_reduce(
+            $this->lances, 
+            function(int $qtd, $lanceAtual) use ($usuario){
+
+                if( $usuario == $lanceAtual->getUsuario() )
+                    return $qtd + 1;
+
+                return $qtd;
+
+            }, 
+            0);
+
+        if( $total >= 5 )
+            return true;
+
+        return false;
+
+    }
+
 }

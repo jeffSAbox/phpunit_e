@@ -42,4 +42,38 @@ class LeilaoTest extends TestCase
     	];
 
     }
+
+    /**
+    *	@dataProvider geraLancesComMaisDe5LancesPorPessoa
+    */
+    public function testLeilaoDeveReceberNoMaximo5LancesDaMesmaPessoa(Leilao $leilao)
+    {
+
+    	self::assertCount(10, $leilao->getLances());
+
+    }
+
+    public function geraLancesComMaisDe5LancesPorPessoa()
+    {
+    	$ana 	= new Usuario("Ana");
+    	$marcos = new Usuario("Marcos");
+
+    	$leilao = new Leilao("Fusca Amarelo");
+    	$leilao->recebeLance(new Lance($ana,1000));
+    	$leilao->recebeLance(new Lance($marcos,1500));
+    	$leilao->recebeLance(new Lance($ana,2000));
+    	$leilao->recebeLance(new Lance($marcos,2500));
+    	$leilao->recebeLance(new Lance($ana,3000));
+    	$leilao->recebeLance(new Lance($marcos,3500));
+    	$leilao->recebeLance(new Lance($ana,4000));
+    	$leilao->recebeLance(new Lance($marcos,4500));
+    	$leilao->recebeLance(new Lance($ana,5000));
+    	$leilao->recebeLance(new Lance($marcos,5500));
+
+    	$leilao->recebeLance(new Lance($ana,6000));
+
+    	return [
+    		[$leilao]
+    	];
+    } 
 }
