@@ -6,9 +6,18 @@ use PHPUnit\Framework\TestCase;
 use PhpUnitEstudo\Leilao\Model\Usuario;
 use PhpUnitEstudo\Leilao\Model\Leilao;
 use PhpUnitEstudo\Leilao\Model\Lance;
+use PhpUnitEstudo\Leilao\Service\Avaliador;
 
 class LeilaoTest extends TestCase
 {
+
+	private $leiloeiro;
+
+
+	protected function setUp(): void{
+		$this->leiloeiro = new Avaliador();
+	}
+
 	/**
 	*	@dataProvider geraLances
 	*/
