@@ -10,44 +10,47 @@ use PhpUnitEstudo\Leilao\Model\Usuario;
 class LanceTest extends TestCase
 {
 
-    /**
-     * @dataProvider geraLances
-     */
-    public function testVerificaRepeticaoDeLanceDoMesmoUsuario(Leilao $leilao, int $qtd)
+    public function testVerificaRepeticaoDeLanceDoMesmoUsuario()
     {
-        self::assertCount($qtd, $leilao->getLances());
 
-        $ultimoLance = new Lance(new Usuario("Variavel Inicial"), 0);
-        foreach( $leilao->getLances() as $i => $lance ){
-            if($ultimoLance->getUsuario() == $lance->getUsuario() ) {
-                self::assertTrue("Existe lances em sequencia da mesma pessoa/usuário");
-            }
-            $ultimoLance = $lance;
-        }
-    }
+        self::expectException(\DomainException::class);
+        self::expectExceptionMessage("Não pode ter 2+ lançes consecutivos");
 
-    public function geraLances()
-    {
         $joao = new Usuario('João');
         $maria = new Usuario("Maria");
 
-        $leilao = new Leilao("FIAT 147 0KM");
-        $leilao->recebeLance(new Lance($joao, 1000));
+        $leilao = new Leilao("FUSCA 1980 0KM");
+        
         $leilao->recebeLance(new Lance($maria, 2000));
         $leilao->recebeLance(new Lance($joao, 5000));
+        $leilao->recebeLance(new Lance($joao, 6000));
 
-        $leilao2 = new Leilao("FUSCA 1980 0KM");
-        $leilao2->recebeLance(new Lance($joao, 1000));
-        $leilao2->recebeLance(new Lance($maria, 2000));
-        $leilao2->recebeLance(new Lance($joao, 5000));
-        $leilao2->recebeLance(new Lance($joao, 6000));
-        $leilao2->recebeLance(new Lance($maria, 6000));
-        $leilao2->recebeLance(new Lance($maria, 15000));
+        
+    }
 
-        return [
-         "LancesEmOrdem" => [$leilao, 3],
-         "LancesRepetidosSequencia" => [$leilao2, 4]
-        ];
+    public function testLeilaoDeveReceberNoMaximo5LancesDaMesmaPessoa()
+    {
+
+        self::expectException(\DomainException::class);
+        self::expectExceptionMessage("Limite de 5 lances por pessoa");
+
+        $ana    = new Usuario("Ana");
+        $marcos = new Usuario("Marcos");
+
+        $leilao = new Leilao("Fusca Amarelo");
+        $leilao->recebeLance(new Lance($ana,1000));
+        $leilao->recebeLance(new Lance($marcos,1500));
+        $leilao->recebeLance(new Lance($ana,2000));
+        $leilao->recebeLance(new Lance($marcos,2500));
+        $leilao->recebeLance(new Lance($ana,3000));
+        $leilao->recebeLance(new Lance($marcos,3500));
+        $leilao->recebeLance(new Lance($ana,4000));
+        $leilao->recebeLance(new Lance($marcos,4500));
+        $leilao->recebeLance(new Lance($ana,5000));
+        $leilao->recebeLance(new Lance($marcos,5500));
+
+        $leilao->recebeLance(new Lance($ana,6000));        
+
     }
 
 }

@@ -53,7 +53,7 @@ class Leilao
 
         $nomeUltimo = $this->lances[array_key_last($this->lances)];
         if( $lance->getUsuario() == $nomeUltimo->getUsuario() ) 
-            return true;
+            throw new \DomainException("Não pode ter 2+ lançes consecutivos");
         
         return false;
     }
@@ -67,7 +67,7 @@ class Leilao
             function(int $qtd, $lanceAtual) use ($usuario){
 
                 if( $usuario == $lanceAtual->getUsuario() )
-                    return $qtd + 1;
+                    throw new \DomainException("Limite de 5 lances por pessoa");
 
                 return $qtd;
 
