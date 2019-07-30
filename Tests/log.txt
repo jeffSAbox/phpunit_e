@@ -6,6 +6,7 @@ PhpUnitEstudo\Tests\Model\Leilao
  [x] Leilao deve receber lances with data set "leilao1"
  [x] Leilao deve receber lances with data set "leilao2"
  [x] Leilao deve receber no maximo 5 lances da mesma pessoa with data set #0
+ [x] Leilao nao deve estar vazio
 
 PhpUnitEstudo\Tests\Service\Avaliador
  [x] Avaliador deve encontrar o maior valor with data set "leilao em Ordem aleatoria"

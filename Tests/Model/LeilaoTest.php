@@ -14,7 +14,8 @@ class LeilaoTest extends TestCase
 	private $leiloeiro;
 
 
-	protected function setUp(): void{
+	protected function setUp(): void
+	{
 		$this->leiloeiro = new Avaliador();
 	}
 
@@ -85,4 +86,14 @@ class LeilaoTest extends TestCase
     		[$leilao]
     	];
     } 
+
+    public function testLeilaoNaoDeveEstarVazio()
+    {
+
+    	self::expectException(\DomainException::class);
+    	self::expectExceptionMessage("Não é possível avaliar leilão vazio(sem lançes)");
+
+    	$leilao = new Leilao("Carro sem porta, sem teto, sem rodas");
+    	$this->leiloeiro->avalia($leilao);
+    }
 }
